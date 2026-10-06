@@ -20,6 +20,7 @@ programa {
       cadeia nome_meu_pokemon = "Pikachu"
       inteiro hp_meu_pokemon = 100
       inteiro max_hp_meu_pokemon = 100
+      inteiro pocoes = 2
       // Informações do pokemón inimigo
       cadeia nome_pokemon_inimigo = "Gengar" 
       inteiro hp_pokemon_inimigo = 120
@@ -49,7 +50,7 @@ programa {
        * Môdulo (%) = calcula o resto de uma divisão, exemplo = 3 % 2
        */
   
-      inteiro dano = util.sorteia(22, 90)
+      inteiro dano = util.sorteia(22, 36)
       hp_pokemon_inimigo = hp_pokemon_inimigo - dano
       /**
        * Operadores Relacionais
@@ -65,16 +66,37 @@ programa {
         hp_pokemon_inimigo = 0
       }
       escreva(">> ", nome_meu_pokemon, " causou ", dano, " de dano ", "\n")
-      escreva(">> HP restante de ", nome_pokemon_inimigo, ": ", hp_pokemon_inimigo, "/", max_hp_pokemon_inimigo, "\n") 
-      
-      desenhar_cena(nome_meu_pokemon,
-        hp_meu_pokemon,
-        max_hp_meu_pokemon,
-        nome_pokemon_inimigo,
-        hp_pokemon_inimigo,
-        max_hp_pokemon_inimigo,
-        nome_meu_pokemon + " causou " + dano + " de dano!"
+      /**
+       * Operadores Lógicos
+       * E - O operador lógico E só é verdadeiro se todas as condições forem verdadeiros
+       * OU - Só é verdadeiro desde que pelo menos uma condição seja verdadeira
+       * NÂo - Ele inverte o valor lógico, se for verdadeiro, passa a se falso e vice-versa
+       */
+      logico vitoria = (hp_pokemon_inimigo == 0) e (hp_pokemon_inimigo <= max_hp_pokemon_inimigo)
+      // Estrutura condicional simples aceita as funções SE e SENAO
+      se(vitoria) {
+       desenhar_cena(
+            nome_meu_pokemon,
+            hp_meu_pokemon,
+            max_hp_meu_pokemon,
+            nome_pokemon_inimigo,
+            hp_pokemon_inimigo,
+            max_hp_pokemon_inimigo,
+            nome_pokemon_inimigo + " desmaiou! Você venceu!"
         )   
+      } senao {
+          logico posso_continuar = (hp_pokemon_inimigo > 0) ou (pocoes > 0)
+          desenhar_cena(
+            nome_meu_pokemon,
+            hp_meu_pokemon,
+            max_hp_meu_pokemon,
+            nome_pokemon_inimigo,
+            hp_pokemon_inimigo,
+            max_hp_pokemon_inimigo,
+            nome_meu_pokemon + " Causou " + dano + " de dano!"
+          )
+          escreva(">> ", nome_pokemon_inimigo, " ainda resiste com ", hp_pokemon_inimigo, " HP. Posso continuar? ", posso_continuar, "\n")
+      }
 
       // A função aguarde irá executar a janela por 5 segundos
       util.aguarde(5000)
