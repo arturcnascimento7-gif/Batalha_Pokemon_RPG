@@ -24,6 +24,22 @@ programa {
       cadeia nome_pokemon_inimigo = "Gengar" 
       inteiro hp_pokemon_inimigo = 120
       inteiro max_hp_pokemon_inimigo = 120
+      /**
+       * Operadores aritméticos
+       * Soma(+): realizar a soma de dois ou mais números, exemplo: soma = 2 + 2 
+       * Subtração (-) = realizar a subtração de dois ou mais números, exemplo:  sub = 3 - 2
+       * Multiplicação (*) = realizar a multiplicação de dois números, exemplo: multiplicação = 2 * 2
+       * Divisão (/) = realizar a divisão de dois números, exemplo: divisão = 2/2
+       * Môdulo (%) = calcula o resto de uma divisão, exemplo = 3 % 2
+       */
+  
+      inteiro dano = util.sorteia(22, 35)
+      hp_pokemon_inimigo = hp_pokemon_inimigo - dano
+      escreva("=== FICHA DA BATALHA ===", "\n")
+      escreva(nome_meu_pokemon, " - HP: ", hp_meu_pokemon, "/", max_hp_meu_pokemon, "\n")
+      escreva(nome_pokemon_inimigo, " - HP: ", hp_pokemon_inimigo, "/", max_hp_pokemon_inimigo, " (sofreu ",dano, " de dano)", "\n")
+       
+
       // Desenho do céu da tela
       graficos.definir_cor(graficos.criar_cor(150, 216, 250))
       graficos.desenhar_retangulo(0, 0, LARGURA, 260, falso, verdadeiro)
@@ -47,6 +63,13 @@ programa {
       // Desenho inicial do nosso pokemón
       graficos.definir_cor(graficos.criar_cor(255, 215, 0))
       graficos.desenhar_retangulo(180, 300, 110, 100, falso, verdadeiro)
+
+      // Textos de informações dos pokemóns
+      graficos.definir_cor(graficos.COR_PRETO)
+      graficos.desenhar_texto(60, 55, nome_pokemon_inimigo + " HP: " + hp_pokemon_inimigo + "/" + max_hp_pokemon_inimigo)
+      
+      graficos.desenhar_texto(480, 372, nome_meu_pokemon + " HP: " + hp_meu_pokemon + "/" + max_hp_meu_pokemon)
+
       
       // Esta função é responsável por mostrar a tela do jogo
       graficos.renderizar()
